@@ -12,25 +12,25 @@ class Filters:
             cls.AddLevelFilters(filters.get("level"), filter_list)
 
         if filters.get("message") is not None:
-            cls.AddLevelFilters(filters.get("message"), filter_list)
+            cls.AddMessageFilters(filters.get("message"), filter_list)
 
         if filters.get("resource_id") is not None:
-            cls.AddLevelFilters(filters.get("resource_id"), filter_list)
+            cls.AddResource_idFilters(filters.get("resource_id"), filter_list)
 
         if filters.get("timestamp") is not None:
-            cls.AddLevelFilters(filters.get("timestamp"), filter_list)
+            cls.AddtimestampFilters(filters.get("timestamp"), filter_list)
 
         if filters.get("trace_id") is not None:
-            cls.AddLevelFilters(filters.get("trace_id"), filter_list)
+            cls.AddTrace_idFilters(filters.get("trace_id"), filter_list)
 
         if filters.get("spanId") is not None:
-            cls.AddLevelFilters(filters.get("spanId"), filter_list)
+            cls.AddspanIdFilters(filters.get("spanId"), filter_list)
 
         if filters.get("commit") is not None:
-            cls.AddLevelFilters(filters.get("commit"), filter_list)
+            cls.AddcommitIdFilters(filters.get("commit"), filter_list)
 
         if filters.get("parent_resource_id") is not None:
-            cls.AddLevelFilters(filters.get("parent_resource_id"), filter_list)
+            cls.AddParentResourceIdFilters(filters.get("parent_resource_id"), filter_list)
 
         return filter_list
 
@@ -62,8 +62,9 @@ class Filters:
             field = field_mapping.get_field("timestamp")
             start_time = timestamp_filter_values.get("start_time")
             end_time = timestamp_filter_values.get("end_time")
-            time_stamp_filter = elastic_repo.generateRangeQuery(field, start_time, end_time, True)
-            filter_list.append(time_stamp_filter)
+            if start_time is not None or end_time is not None:
+                time_stamp_filter = elastic_repo.generateRangeQuery(field, start_time, end_time, True)
+                filter_list.append(time_stamp_filter)
 
     @staticmethod
     def AddTrace_idFilters(trace_id_values, filter_list):

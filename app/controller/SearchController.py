@@ -16,7 +16,7 @@ def search():
         if not request.json:
             return jsonify(json.dumps("Empty Request Form")), 400
         search_query = BuildQuery.get_search_query(request.json)
-        logs = Results.get_logs(search_query, "log_system")
+        logs = Results.get_logs([search_query], "log_system")
         result = {
             "logs": logs,
             "log_count": len(logs)

@@ -25,11 +25,16 @@ class BuildQuery:
 
     def get_query_block(self, queries):
         should_clause = None
+        clauses = []
         if queries is not None:
             query_words = queries.split(",")
             search_fields = field_mapping.get_search_fields()
-            should_clause = elastic_repo.generateMatchPhraseQuery(search_fields, query_words)
-        return should_clause
+
+            for field in search_fields:
+                should_clause = elastic_repo.generateMatchPhraseQuery(field, query_words)
+                clauses.append(should_clause)
+        should_query = elastic_repo.generateShouldQuery(clauses)
+        return should_query
 
 
 BuildQuery = BuildQuery()

@@ -6,6 +6,6 @@ app = Flask(__name__)
 app.register_blueprint(search_module)
 
 # Run the Flask application
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
 

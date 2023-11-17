@@ -1,3 +1,4 @@
 elasticsearch==7.17.1
 elasticsearch-dsl==7.4.0
 Flask==2.0.3
+Werkzeug==2.0.3
