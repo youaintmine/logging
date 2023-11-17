@@ -8,7 +8,7 @@ from app.services.ElasticIngestService import ElasticIngester
 ingest_module = Blueprint('ingest', __name__)
 
 @ingest_module.route("/ingest_logs", methods=["POST", "GET"])
-def search():
+def ingest_logs():
     log_data, result= {},{}
     if request.method == "GET":
         return "Ingest logs API takes POST requests. Thank You!"
