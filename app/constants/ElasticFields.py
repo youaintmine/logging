@@ -2,10 +2,10 @@ class ElasticFields:
     main_mapping = {
         "level": "level.keyword",
         "message": "message.keyword",
-        "resource_id": "resource_id.keyword",
+        "resource_id": "resourceId.keyword",
         "timestamp": "timestamp",
-        "trace_id": "trace_id.keyword",
-        "span_id": "span_id.keyword",
+        "trace_id": "traceId.keyword",
+        "span_id": "spanId.keyword",
         "commit": "commit.keyword",
         "parent_resource_id": "metadata.parentResourceId.keyword"
 
@@ -14,10 +14,11 @@ class ElasticFields:
     SEARCH_FIELDS = [
         "level",
         "message",
-        "resource_id",
-        "span_id",
+        "resourceId",
+        "spanId",
         "commit",
-        "metadata.parentResourceId"
+        "metadata.parentResourceId",
+        "traceId"
     ]
 
     def get_field(self, field):
