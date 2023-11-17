@@ -8,7 +8,7 @@ class Results:
         logs = []
 
         for log in es_results["responses"][0]["hits"]["hits"]:
-            logs.append(log)
+            logs.append(log["_source"])
 
         return logs
 

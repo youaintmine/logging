@@ -5,6 +5,7 @@ from app.services.Filter.Filters import Filters
 
 class BuildQuery:
     def get_search_query(self, request_form):
+        filter_list, query_block = None, None
         if request_form.get('filters') is not None:
             filter_list = Filters.addFilters(request_form.get('filters'))
 
@@ -14,10 +15,12 @@ class BuildQuery:
         page_start = request_form.get("page_start", 0)
         page_size = request_form.get("page_size", 20)
 
-        query = {"query": {"bool":{}}}
+        query = {"query": {"bool": {}}}
 
-        query["query"]["bool"]["should"] = query_block
-        query["query"]["bool"]["filter"] = filter_list
+        if query_block is not None:
+            query["query"]["bool"]["should"] = query_block
+        if filter_list is not None and len(filter_list):
+            query["query"]["bool"]["filter"] = filter_list
         query["from"] = page_start
         query["size"] = page_size
 
