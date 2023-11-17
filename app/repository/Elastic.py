@@ -1,5 +1,5 @@
 from elasticsearch_dsl import Q
-
+from app.utility.Elastic import ElasticConnector
 
 class ElasticRepository:
 
@@ -157,5 +157,8 @@ class ElasticRepository:
     def get_match_phrase_clause(self, query_field, value, boost):
         return {"match_phrase": {query_field: {"query": value, "boost": boost}}}
 
+    def execute_bulk_actions(self, actions):
+        ElasticConnector.bulk(actions)
+        return
 
 elastic_repo = ElasticRepository()

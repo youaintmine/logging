@@ -4,6 +4,8 @@ import os
 from elasticsearch import Elasticsearch
 from elasticsearch.client.indices import IndicesClient
 from elasticsearch.exceptions import RequestError
+from elasticsearch.helpers import bulk
+from elasticsearch.helpers.errors import BulkIndexError
 from elasticsearch_dsl import Search
 
 from app.config.Elastic import Credentials
@@ -45,6 +47,15 @@ class EsConnector:
 
     def close_connection(self):
         self.es_client.transport.close()
+
+    def bulk(self, data):
+        try:
+            result = bulk(self.es_client, data, refresh=Credentials.refresh)
+            print(f"indexing result {result}")
+        except BulkIndexError as e:
+            print(f"bulk indexing error: {e}")
+        except Exception as e:
+            print(f"Failed to index with error: {e}")
 
 
 ElasticConnector = EsConnector(Credentials.hosts, Credentials.user, Credentials.password)
