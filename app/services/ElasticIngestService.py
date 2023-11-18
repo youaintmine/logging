@@ -1,5 +1,4 @@
 from app.repository.Elastic import elastic_repo
-from app.utility.Elastic import ElasticConnector
 
 
 class IngestService:

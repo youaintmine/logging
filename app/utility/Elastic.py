@@ -1,12 +1,8 @@
-import json
 import os
-
 from elasticsearch import Elasticsearch
 from elasticsearch.client.indices import IndicesClient
-from elasticsearch.exceptions import RequestError
 from elasticsearch.helpers import bulk
 from elasticsearch.helpers.errors import BulkIndexError
-from elasticsearch_dsl import Search
 
 from app.config.Elastic import Credentials
 
@@ -21,6 +17,7 @@ def create_es_connection(hosts, user, password):
             return Elasticsearch(hosts, maxsize=25, timeout=120)
     except Exception as error:
         print(error)
+
 
 class EsConnector:
     hosts = []
@@ -43,7 +40,6 @@ class EsConnector:
 
     def initializeESIndicesClient(self):
         return IndicesClient(self.es_client)
-
 
     def close_connection(self):
         self.es_client.transport.close()

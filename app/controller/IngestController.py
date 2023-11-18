@@ -7,6 +7,7 @@ from app.services.ElasticIngestService import ElasticIngester
 
 ingest_module = Blueprint('ingest', __name__)
 
+
 @ingest_module.route("/ingest_logs", methods=["POST", "GET"])
 def ingest_logs():
     log_data, result= {},{}

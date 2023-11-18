@@ -2,7 +2,6 @@ from app.constants.ElasticFields import field_mapping
 from app.repository.Elastic import elastic_repo
 
 
-
 class Filters:
     @classmethod
     def addFilters(cls, filters):

@@ -29,4 +29,3 @@ class ElasticFields:
 
 
 field_mapping = ElasticFields()
-

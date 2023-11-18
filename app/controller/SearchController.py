@@ -9,7 +9,7 @@ search_module = Blueprint('search', __name__)
 
 @search_module.route("/search", methods=["POST", "GET"])
 def search():
-    log_data, result= {},{}
+    log_data, result = {}, {}
     if request.method == "GET":
         return "Search_API takes POST requests. Thank You!"
     try:
